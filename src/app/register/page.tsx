@@ -1,0 +1,166 @@
+"use client";
+
+import Image from "next/image";
+import Link from "next/link";
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useRegisterMutation } from "@/api/user";
+import { BeatLoader } from "react-spinners";
+import ActionButton from "@/components/button/actionButton";
+
+const createUserFormSchema = z
+  .object({
+    name: z.string().min(1, "Nome não pode ser vazio"),
+    height: z.string(),
+    weight: z.string(),
+    email: z.string().email("Formato de email inválido"),
+    password: z.string().min(6, "A senha precisa de pelo menos 6 caracteres"),
+    confirmPassword: z.string(),
+  })
+  .superRefine(({ confirmPassword, password }, ctx) => {
+    if (confirmPassword !== password) {
+      ctx.addIssue({
+        code: "custom",
+        path: ["password"],
+        message: "As senhas não são idênticas",
+      });
+    }
+  });
+
+type CreateUserFormData = z.infer<typeof createUserFormSchema>;
+
+export default function Page() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<CreateUserFormData>({
+    resolver: zodResolver(createUserFormSchema),
+  });
+
+  const { mutate, isLoading } = useRegisterMutation();
+
+  const createUser = (data: CreateUserFormData) => {
+    mutate({
+      email: data.email,
+      password: data.password,
+      client: {
+        name: data.name,
+        height: Number(data.height.replace(",", "")),
+        weight: Number(data.weight),
+      },
+    });
+  };
+
+  return (
+    <main>
+      <div className={"h-screen flex justify-center align-middle"}>
+        <div
+          className={"flex justify-end border-r-2 border-zinc-800 w-1/2 px-28"}
+        >
+          <Image src="/image3.svg" alt="picture" width={600} height={0} />
+        </div>
+        <div className={"flex flex-col flex-1 justify-center gap-6 px-28"}>
+          <p className={"text-4xl mb-4 w-96 text-center"}>Crie sua conta</p>
+          <form
+            onSubmit={handleSubmit(createUser)}
+            className={"flex flex-col gap-6"}
+          >
+            <div className={"w-96"}>
+              <input
+                className={"bg-zinc-800 rounded-lg h-12 px-3 text-lg w-full"}
+                placeholder={"Nome"}
+                type={"text"}
+                {...register("name")}
+              />
+              {errors.name && (
+                <span className={"text-sm text-red-500 ml-2"}>
+                  {errors.name.message}
+                </span>
+              )}
+            </div>
+            <div className={"w-96"}>
+              <input
+                className={"bg-zinc-800 rounded-lg h-12 px-3 text-lg w-full"}
+                placeholder={"Altura"}
+                type={"text"}
+                {...register("height")}
+              />
+              {errors.height && (
+                <span className={"text-sm text-red-500 ml-2"}>
+                  {errors.height.message}
+                </span>
+              )}
+            </div>
+            <div className={"w-96"}>
+              <input
+                className={"bg-zinc-800 rounded-lg h-12 px-3 text-lg w-full"}
+                placeholder={"Peso"}
+                type={"text"}
+                {...register("weight")}
+              />
+              {errors.weight && (
+                <span className={"text-sm text-red-500 ml-2"}>
+                  {errors.weight.message}
+                </span>
+              )}
+            </div>
+            <div className={"w-96"}>
+              <input
+                className={"bg-zinc-800 rounded-lg h-12 px-3 text-lg w-full"}
+                placeholder={"Email"}
+                type={"text"}
+                {...register("email")}
+              />
+              {errors.email && (
+                <span className={"text-sm text-red-500 ml-2"}>
+                  {errors.email.message}
+                </span>
+              )}
+            </div>
+            <div className={"w-96"}>
+              <input
+                className={"bg-zinc-800 rounded-lg h-12 px-3 text-lg w-full"}
+                placeholder={"Senha"}
+                type={"password"}
+                {...register("password")}
+              />
+              {errors.password && (
+                <span className={"text-sm text-red-500 ml-2"}>
+                  {errors.password.message}
+                </span>
+              )}
+            </div>
+            <div className={"w-96"}>
+              <input
+                className={"bg-zinc-800 rounded-lg h-12 px-3 text-lg w-full"}
+                placeholder={"Confirma a senha"}
+                type={"password"}
+                {...register("confirmPassword")}
+              />
+              {errors.confirmPassword && (
+                <span className={"text-sm text-red-500 ml-2"}>
+                  {errors.confirmPassword.message}
+                </span>
+              )}
+            </div>
+            <div className={"w-96"}>
+              {!isLoading ? (
+                <ActionButton>Criar conta</ActionButton>
+              ) : (
+                <BeatLoader className={"text-center w-full"} color="#dc2626" />
+              )}
+              <p className={"text-end text-sm pt-1"}>
+                Ja tem uma conta?
+                <Link className={"underline cursor-pointer"} href={"/login"}>
+                  clique aqui
+                </Link>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+  );
+}
