@@ -51,7 +51,7 @@ const WorkoutCard = ({ workout, onClick }: WorkoutCardProps) => {
       <div
         key={workout.id}
         className={
-          "flex justify-between items-center bg-zinc-800 rounded-lg w-11/12 max-w-xl h-28 text-xl shadow-lg"
+          "flex justify-between items-center bg-zinc-800 rounded-lg w-11/12 max-w-xl h-20 text-xl shadow-lg lg:h-28"
         }
       >
         <div className={"flex items-center gap-5 ml-5"}>
@@ -100,13 +100,13 @@ const WorkoutCard = ({ workout, onClick }: WorkoutCardProps) => {
             </button>
             <div className={"flex gap-3"}>
               <button
-                className={"bg-red-600 w-20 h-12 rounded-lg font-bold sm:w-32"}
+                className={"bg-red-600 w-20 h-12 rounded-lg font-bold lg:w-32"}
                 onClick={handleEditWorkout}
               >
                 Salvar
               </button>
               <button
-                className={"bg-gray-500 w-20 h-12 rounded-lg font-bold sm:w-32"}
+                className={"bg-gray-500 w-20 h-12 rounded-lg font-bold lg:w-32"}
                 onClick={handleClose}
               >
                 Cancelar

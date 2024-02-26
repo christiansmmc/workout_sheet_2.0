@@ -32,7 +32,7 @@ export default function Page({ params }: { params: { id: string } }) {
         />
         <User size={32} className={"cursor-pointer"} />
       </header>
-      <div className={"flex flex-col gap-6 items-center mt-10 mb-10"}>
+      <div className={"flex flex-col gap-3 items-center my-4 lg:gap-6"}>
         {isSuccess && data ? (
           data?.workoutExercises
             .sort((a, b) => {

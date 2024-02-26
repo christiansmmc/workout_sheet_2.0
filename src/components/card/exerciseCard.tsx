@@ -58,10 +58,10 @@ const ExerciseCard = ({ workoutExercise, workoutId }: ExerciseCardProps) => {
     <>
       <div
         className={
-          "flex justify-between items-center bg-zinc-800 rounded-lg w-11/12 max-w-2xl h-24 shadow-lg sm:h-20"
+          "flex justify-between items-center bg-zinc-800 rounded-lg w-11/12 max-w-2xl h-20 shadow-lg"
         }
       >
-        <div className={"flex items-center ml-3 text-lg sm:ml-5"}>
+        <div className={"flex items-center ml-3 text-base lg:ml-5 lg:text-lg"}>
           <p>{workoutExercise.exercise.name}</p>
         </div>
         <div className={"flex items-center gap-5 mr-5"}>
@@ -74,9 +74,22 @@ const ExerciseCard = ({ workoutExercise, workoutId }: ExerciseCardProps) => {
             className={"w-20 h-10 text-center bg-zinc-900 rounded-lg"}
           />
           <div
-            className={
-              "flex justify-center items-center bg-zinc-600 h-8 w-20 rounded-xl text-sm sm:w-24"
-            }
+            className={`
+            ${
+              workoutExercise.exercise.bodyPart === "PEITO"
+                ? "bg-teal-500"
+                : workoutExercise.exercise.bodyPart === "TRICEPS"
+                  ? "bg-blue-500"
+                  : workoutExercise.exercise.bodyPart === "OMBRO"
+                    ? "bg-emerald-500"
+                    : workoutExercise.exercise.bodyPart === "PERNA"
+                      ? "bg-amber-500"
+                      : workoutExercise.exercise.bodyPart === "COSTAS"
+                        ? "bg-pink-500"
+                        : workoutExercise.exercise.bodyPart === "BICEPS"
+                          ? "bg-violet-500"
+                          : "bg-zinc-600"
+            } flex justify-center items-center h-8 w-20 rounded-xl text-sm lg:w-24`}
           >
             {workoutExercise.exercise.bodyPart}
           </div>

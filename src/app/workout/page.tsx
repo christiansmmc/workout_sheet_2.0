@@ -40,7 +40,9 @@ export default function Page() {
         />
         <User size={32} className={"cursor-pointer"} />
       </header>
-      <section className={"flex flex-1 flex-col items-center gap-7 my-10"}>
+      <section
+        className={"flex flex-1 flex-col items-center gap-4 my-10 lg:gap-7"}
+      >
         {isSuccess && data ? (
           data
             .sort((a, b) => (a.name < b.name ? -1 : a.name > b.name ? 1 : 0))
