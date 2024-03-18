@@ -50,6 +50,8 @@ export const getExercisesFromWorkoutQuery = async (
 };
 
 export const useGetExercisesFromWorkoutQuery = (workoutId: string) => {
+  const router = useRouter();
+
   const { isLoading, isSuccess, isError, isFetching, error, remove, data } =
     useQuery<GetWorkoutExercisesResponse, AxiosError<RequestError>>({
       queryKey: ["GetWorkoutExercises"],
