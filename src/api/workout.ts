@@ -55,6 +55,11 @@ export const useGetExercisesFromWorkoutQuery = (workoutId: string) => {
       queryKey: ["GetWorkoutExercises"],
       enabled: workoutId != "",
       queryFn: () => getExercisesFromWorkoutQuery(workoutId),
+      onError: (err) => {
+        if (err?.response?.status === 401) {
+          router.push("/login");
+        }
+      },
     });
 
   return {
