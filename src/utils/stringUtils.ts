@@ -2,7 +2,7 @@ export const isNumber = (str: string) => {
     return !isNaN(Number(str));
 };
 
-export const capitalize = (str: string) => {
+export const capitalizeAllWords = (str: string) => {
     const words = str.split(" ");
 
     for (let i = 0; i < words.length; i++) {
@@ -10,4 +10,9 @@ export const capitalize = (str: string) => {
     }
 
     return words.join(" ");
+};
+
+export const capitalize = (str: string) => {
+    if (!str) return str;
+    return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
 };
