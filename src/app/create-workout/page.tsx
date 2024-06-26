@@ -6,6 +6,7 @@ import {useGetExercisesQuery} from "@/api/exercise";
 import {MoonLoader} from "react-spinners";
 import {CreateWorkoutRequest} from "@/api/interfaces/workout";
 import {useCreateWorkoutMutation} from "@/api/workout";
+import Image from "next/image";
 
 export default function Page() {
     const [fetchExercises, setFetchExercises] = useState(false);
@@ -60,7 +61,6 @@ export default function Page() {
 
     const handleFinishExercisesSelect = () => {
         if (exercisesSelected.length <= 0) {
-            console.log("error")
             return
         }
 
@@ -69,7 +69,6 @@ export default function Page() {
 
     const handleFinishDetailsSelect = () => {
         if (!workoutNameSelected || workoutNameSelected.length === 0) {
-            console.log("error")
             return
         }
 
@@ -119,8 +118,19 @@ export default function Page() {
                                 return <div
                                     key={index}
                                     onClick={() => handleSelectExercise(exercise.id)}
-                                    className={`flex flex-shrink-0 justify-between items-center px-2 border ${isSelected ? 'border-red-500' : 'border-zinc-600'} bg-zinc-800 rounded w-4/5 h-12 cursor-pointer`}>
-                                    <div>
+                                    className={`flex flex-shrink-0 justify-between items-center px-2 border 
+                                    bg-zinc-800/75 rounded w-5/6 h-24 cursor-pointer
+                                    ${isSelected ? 'border-red-500' : 'border-zinc-600'}`}
+                                >
+                                    <div className="w-1/5">
+                                        {exercise.image
+                                            ? <Image src={`data:image/png;base64, ${exercise.image}`}
+                                                   alt={`imagem do exercicio ${exercise.name}`}
+                                                   width={100} height={100} className={"rounded-lg"}/>
+                                            : <div className="h-16 w-16 rounded-lg border"></div>
+                                        }
+                                    </div>
+                                    <div className="flex-grow pl-3">
                                         {capitalize(exercise.name)}
                                     </div>
                                     <div
@@ -138,7 +148,7 @@ export default function Page() {
                                                                 : exercise.bodyPart === "BICEPS"
                                                                     ? "bg-violet-500"
                                                                     : "bg-zinc-600"
-                                        } flex justify-center items-center h-8 w-20 rounded-xl text-sm lg:w-24`}
+                                        } flex justify-center items-center h-8 w-1/5 rounded text-sm lg:w-24`}
                                     >
                                         {exercise.bodyPart}
                                     </div>
