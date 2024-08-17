@@ -9,9 +9,7 @@ import ExerciseCard from "@/components/card/exerciseCard";
 export default function Page({ params }: { params: { id: string } }) {
   const router = useRouter();
 
-  const { isSuccess, data, remove } = useGetExercisesFromWorkoutQuery(
-    params.id,
-  );
+  const { isSuccess, data, remove } = useGetExercisesFromWorkoutQuery(params.id);
 
   const handleGoBack = () => {
     router.push("/workout");
@@ -20,25 +18,15 @@ export default function Page({ params }: { params: { id: string } }) {
 
   return (
     <main>
-      <header
-        className={
-          "flex items-center justify-between px-10 bg-zinc-800 h-16 shadow-lg"
-        }
-      >
-        <ArrowLeft
-          size={32}
-          className={"cursor-pointer"}
-          onClick={handleGoBack}
-        />
+      <header className={"flex items-center justify-between px-10 bg-zinc-800 h-16 shadow-lg"}>
+        <ArrowLeft size={32} className={"cursor-pointer"} onClick={handleGoBack} />
         <User size={32} className={"cursor-pointer"} />
       </header>
       <div className={"flex flex-col gap-3 items-center my-4 lg:gap-6"}>
         {isSuccess && data ? (
           data?.workoutExercises
             .sort((a, b) => {
-              const bodyPartComparison = a.exercise.bodyPart.localeCompare(
-                b.exercise.bodyPart,
-              );
+              const bodyPartComparison = a.exercise.bodyPart.localeCompare(b.exercise.bodyPart);
 
               return bodyPartComparison === 0
                 ? a.exercise.name.localeCompare(b.exercise.name)

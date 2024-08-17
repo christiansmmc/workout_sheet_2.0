@@ -1,10 +1,7 @@
 import { ChevronRight, Dumbbell, Pencil, Trash2 } from "lucide-react";
 import { useState } from "react";
 import { Dialog } from "@mui/material";
-import {
-  useDeleteWorkoutMutation,
-  usePatchWorkoutMutation,
-} from "@/api/workout";
+import { useDeleteWorkoutMutation, usePatchWorkoutMutation } from "@/api/workout";
 
 interface WorkoutCardProps {
   workout: {
@@ -59,16 +56,11 @@ const WorkoutCard = ({ workout, onClick }: WorkoutCardProps) => {
           <p>{workout.name}</p>
         </div>
         <div className={"flex items-center gap-2 mr-5"}>
-          <button
-            onClick={handleClickOpen}
-            className={"flex justify-center items-center w-14 h-12"}
-          >
+          <button onClick={handleClickOpen} className={"flex justify-center items-center w-14 h-12"}>
             <Pencil />
           </button>
           <button
-            className={
-              "flex justify-center items-center bg-red-600 rounded-lg w-14 h-12"
-            }
+            className={"flex justify-center items-center bg-red-600 rounded-lg w-14 h-12"}
             onClick={() => onClick(workout.id)}
           >
             <ChevronRight size={36} />
@@ -81,11 +73,7 @@ const WorkoutCard = ({ workout, onClick }: WorkoutCardProps) => {
         open={open}
         onClose={handleClose}
       >
-        <div
-          className={
-            "flex flex-col p-7 bg-zinc-800 border-zinc-800 text-zinc-100"
-          }
-        >
+        <div className={"flex flex-col p-7 bg-zinc-800 border-zinc-800 text-zinc-100"}>
           <p className={"mb-5 text-xl font-bold"}>Edite ou delete seu treino</p>
           <div>
             <input
@@ -105,10 +93,7 @@ const WorkoutCard = ({ workout, onClick }: WorkoutCardProps) => {
               >
                 Salvar
               </button>
-              <button
-                className={"bg-gray-500 w-20 h-12 rounded-lg font-bold lg:w-32"}
-                onClick={handleClose}
-              >
+              <button className={"bg-gray-500 w-20 h-12 rounded-lg font-bold lg:w-32"} onClick={handleClose}>
                 Cancelar
               </button>
             </div>
