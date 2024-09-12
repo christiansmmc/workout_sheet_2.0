@@ -1,26 +1,28 @@
 import {Trash2} from "lucide-react";
 import {useState} from "react";
 import {Dialog} from "@mui/material";
-import {useDeleteExerciseFromWorkoutMutation, usePatchWorkoutExerciseMutation,} from "@/api/workout";
 import {capitalize, isNumber} from "@/utils/stringUtils";
+import {useDeleteExerciseFromWorkoutMutation, usePatchWorkoutExerciseMutation} from "@/api/workout/queries";
 
 interface ExerciseCardProps {
     workoutExercise: {
-        id: string;
-        load: number;
-        exercise: { id: string; name: string; bodyPart: string };
+        id: number;
+        exerciseLoad: number;
+        exercise: {
+            id: number;
+            name: string;
+            bodyPart: string;
+        };
     };
-    workoutId: string;
+    workoutId: number;
 }
 
 const ExerciseCard = ({workoutExercise, workoutId}: ExerciseCardProps) => {
     const [open, setOpen] = useState(false);
-    const [inputValue, setInputValue] = useState(workoutExercise.load);
+    const [inputValue, setInputValue] = useState(workoutExercise.exerciseLoad);
 
-    const {mutate: deleteWorkoutExerciseMutate} =
-        useDeleteExerciseFromWorkoutMutation();
-    const {mutate: patchWorkoutExerciseMutate} =
-        usePatchWorkoutExerciseMutation();
+    const {mutate: deleteWorkoutExerciseMutate} = useDeleteExerciseFromWorkoutMutation();
+    const {mutate: patchWorkoutExerciseMutate} = usePatchWorkoutExerciseMutation();
 
     const handleInputOnChange = (e: string) => {
         if (isNumber(e)) {
@@ -29,11 +31,10 @@ const ExerciseCard = ({workoutExercise, workoutId}: ExerciseCardProps) => {
     };
 
     const handleInputOnBlur = () => {
-        if (workoutExercise.load === inputValue) return;
+        if (workoutExercise.exerciseLoad === inputValue) return;
 
         patchWorkoutExerciseMutate({
-            exerciseId: workoutExercise.exercise.id,
-            workoutId,
+            workoutExerciseId: workoutExercise.id,
             load: inputValue,
         });
     };
@@ -46,8 +47,8 @@ const ExerciseCard = ({workoutExercise, workoutId}: ExerciseCardProps) => {
         setOpen(false);
     };
 
-    const handleDeleteWorkoutExercise = (exerciseId: string) => {
-        deleteWorkoutExerciseMutate({workoutId, exerciseId});
+    const handleDeleteWorkoutExercise = (workoutExerciseId: number) => {
+        deleteWorkoutExerciseMutate({workoutExerciseId});
         handleClose();
     };
 
@@ -101,26 +102,17 @@ const ExerciseCard = ({workoutExercise, workoutId}: ExerciseCardProps) => {
                 open={open}
                 onClose={handleClose}
             >
-                <div
-                    className={
-                        "flex flex-col p-7 bg-zinc-800 border-zinc-800 text-zinc-100"
-                    }
-                >
+                <div className={"flex flex-col p-7 bg-zinc-800 border-zinc-800 text-zinc-100"}>
                     <p className={"mb-5 text-xl text-center font-bold"}>
                         Tem certeza que deseja deletar esse exercício ?
                     </p>
                     <div className={"flex justify-center gap-10 pt-7"}>
-                        <button
-                            className={"bg-gray-500 w-32 h-12 rounded-lg font-bold"}
-                            onClick={handleClose}
-                        >
+                        <button className={"bg-gray-500 w-32 h-12 rounded-lg font-bold"} onClick={handleClose}>
                             Cancelar
                         </button>
                         <button
                             className={"bg-red-600 w-32 h-12 rounded-lg font-bold"}
-                            onClick={() =>
-                                handleDeleteWorkoutExercise(workoutExercise.exercise.id)
-                            }
+                            onClick={() => handleDeleteWorkoutExercise(workoutExercise.id)}
                         >
                             Excluir
                         </button>

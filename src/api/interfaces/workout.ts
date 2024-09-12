@@ -1,16 +1,18 @@
 export interface GetWorkoutsResponse {
-    id: string;
+    id: number;
     name: string;
 }
 
 export interface GetWorkoutExercisesResponse {
-    id: string;
+    id: number;
     name: string;
     workoutExercises: {
-        id: string;
-        load: number;
+        id: number;
+        sets: number;
+        reps: number;
+        exerciseLoad: number;
         exercise: {
-            id: string;
+            id: number;
             name: string;
             bodyPart: string;
         };
@@ -18,8 +20,11 @@ export interface GetWorkoutExercisesResponse {
 }
 
 export interface CreateWorkoutRequest {
-    name: string;
-    workoutExercises: {
-        exerciseId: string;
+    workoutName: string;
+    exercises: {
+        exerciseId: number;
+        reps?: number;
+        sets?: number;
+        load?: number;
     }[];
 }

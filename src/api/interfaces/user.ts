@@ -1,18 +1,19 @@
 export interface LoginRequestPayload {
-  email: string;
-  password: string;
+    email: string;
+    password: string;
 }
 
 export interface LoginResponsePayload {
-  access_token: string;
+    token: string;
 }
 
 export interface RegisterRequestPayload {
-  email: string;
-  password: string;
-  client: {
-    name: string;
-    height: number;
-    weight: number;
-  };
+    firstName: string;
+    lastName?: string;
+    weight?: number;
+    height?: number;
+    user: {
+        email: string;
+        password: string;
+    };
 }

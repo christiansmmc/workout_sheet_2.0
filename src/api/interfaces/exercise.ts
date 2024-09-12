@@ -1,6 +1,5 @@
 export interface GetExercisesResponse {
-    id: string
-    name: string
-    bodyPart: string
-    image: string
+    id: number;
+    name: string;
+    bodyPart: string;
 }

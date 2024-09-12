@@ -2,17 +2,16 @@
 
 import {useState} from "react";
 import {capitalize} from "@/utils/stringUtils";
-import {useGetExercisesQuery} from "@/api/exercise";
 import {MoonLoader} from "react-spinners";
 import {CreateWorkoutRequest} from "@/api/interfaces/workout";
-import {useCreateWorkoutMutation} from "@/api/workout";
-import Image from "next/image";
+import {useGetExercisesQuery} from "@/api/exercise/queries";
+import {useCreateWorkoutMutation} from "@/api/workout/queries";
 
 export default function Page() {
     const [fetchExercises, setFetchExercises] = useState(false);
 
     const [bodyPartsSelected, setBodyPartsSelected] = useState<string[]>([]);
-    const [exercisesSelected, setExercisesSelected] = useState<string[]>([]);
+    const [exercisesSelected, setExercisesSelected] = useState<number[]>([]);
     const [workoutNameSelected, setWorkoutNameSelected] = useState<string>();
 
     const {
@@ -41,7 +40,7 @@ export default function Page() {
         );
     }
 
-    const handleSelectExercise = (exercise: string) => {
+    const handleSelectExercise = (exercise: number) => {
         setExercisesSelected(prevState =>
             prevState.includes(exercise)
                 ? prevState.filter(item => item !== exercise)
@@ -73,8 +72,8 @@ export default function Page() {
         }
 
         const createWorkoutRequest: CreateWorkoutRequest = {
-            name: workoutNameSelected,
-            workoutExercises: exercisesSelected.map(exerciseId => ({exerciseId})),
+            workoutName: workoutNameSelected,
+            exercises: exercisesSelected.map(exerciseId => ({exerciseId})),
         };
 
         mutateCreateWorkout(createWorkoutRequest)
@@ -123,12 +122,13 @@ export default function Page() {
                                     ${isSelected ? 'border-red-500' : 'border-zinc-600'}`}
                                 >
                                     <div className="w-1/5">
-                                        {exercise.image
-                                            ? <Image src={`data:image/png;base64, ${exercise.image}`}
-                                                   alt={`imagem do exercicio ${exercise.name}`}
-                                                   width={100} height={100} className={"rounded-lg"}/>
-                                            : <div className="h-16 w-16 rounded-lg border"></div>
-                                        }
+                                        {/*{exercise.image*/}
+                                        {/*    ? <Image src={`data:image/png;base64, ${exercise.image}`}*/}
+                                        {/*             alt={`imagem do exercicio ${exercise.name}`}*/}
+                                        {/*             width={100} height={100} className={"rounded-lg"}/>*/}
+                                        {/*    : <div className="h-16 w-16 rounded-lg border"></div>*/}
+                                        {/*}*/}
+                                        <div className="h-16 w-16 rounded-lg border"></div>
                                     </div>
                                     <div className="flex-grow pl-3">
                                         {capitalize(exercise.name)}
