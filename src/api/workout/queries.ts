@@ -93,10 +93,10 @@ export const usePatchWorkoutExerciseMutation = () => {
     const {mutate} = useMutation<
         AxiosResponse,
         AxiosError<RequestError>,
-        { workoutExerciseId: number; load: number },
+        { workoutExerciseId: number; load: number, sets: number, reps: number },
         unknown
     >({
-        mutationFn: ({workoutExerciseId, load}) => updateExerciseLoadRequest(workoutExerciseId, load),
+        mutationFn: ({workoutExerciseId, load, sets, reps}) => updateExerciseLoadRequest(workoutExerciseId, load, sets, reps),
         onSuccess: () => {
             queryClient.invalidateQueries("GetWorkoutExercises");
         },

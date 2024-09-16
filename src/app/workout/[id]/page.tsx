@@ -22,7 +22,8 @@ export default function Page({params}: { params: { id: number } }) {
                 <ArrowLeft size={32} className={"cursor-pointer"} onClick={handleGoBack}/>
                 <User size={32} className={"cursor-pointer"}/>
             </header>
-            <div className={"flex flex-col gap-3 items-center my-4 lg:gap-6"}>
+            <div
+                className='flex flex-col gap-5 items-center mt-4 max-h-[calc(100vh-6rem)] overflow-y-auto lg:gap-6'>
                 {isSuccess && data ? (
                     data?.workoutExercises
                         .sort((a, b) => {

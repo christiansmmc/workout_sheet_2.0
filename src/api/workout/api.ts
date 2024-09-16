@@ -25,9 +25,11 @@ export const removeExerciseFromWorkoutRequest = async (
     });
 };
 
-export const updateExerciseLoadRequest = async (workoutExerciseId: number, load: number) => {
+export const updateExerciseLoadRequest = async (workoutExerciseId: number, load: number, sets: number, reps: number) => {
     const promise = api.patch(`/workout-exercises/${workoutExerciseId}`, {
         load,
+        sets,
+        reps
     });
 
     return await toast.promise(promise, {

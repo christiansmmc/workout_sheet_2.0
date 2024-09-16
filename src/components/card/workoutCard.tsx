@@ -52,18 +52,18 @@ const WorkoutCard = ({workout, onClick}: WorkoutCardProps) => {
                 }
             >
                 <div className={"flex items-center gap-5 ml-5"}>
-                    <Dumbbell size={34}/>
+                    <Dumbbell size={28}/>
                     <p>{workout.name}</p>
                 </div>
                 <div className={"flex items-center gap-2 mr-5"}>
                     <button onClick={handleClickOpen} className={"flex justify-center items-center w-14 h-12"}>
-                        <Pencil/>
+                        <Pencil size={24}/>
                     </button>
                     <button
                         className={"flex justify-center items-center bg-red-600 rounded-lg w-14 h-12"}
                         onClick={() => onClick(workout.id)}
                     >
-                        <ChevronRight size={36}/>
+                        <ChevronRight size={28}/>
                     </button>
                 </div>
             </div>
