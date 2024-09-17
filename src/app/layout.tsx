@@ -10,7 +10,7 @@ import "react-toastify/dist/ReactToastify.css";
 const inter = Inter({subsets: ["latin"]});
 
 export const metadata: Metadata = {
-    title: "Workout Sheet 2.0",
+    title: "MeuTreino",
     description: "",
 };
 
@@ -22,8 +22,8 @@ export default function RootLayout({
     return (
         <ReactQueryProvider>
             <AppRouterCacheProvider>
-                <html lang="en" className={inter.className}>
-                <body className={"bg-zinc-900 text-zinc-100"}>
+                <html lang="en" className={`h-full ${inter.className}`}>
+                <body className={"h-full bg-zinc-900 text-zinc-100"}>
                 {children}
                 <ToastContainer
                     position="top-right"

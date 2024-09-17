@@ -80,7 +80,7 @@ export default function Page() {
     }
 
     return (
-        <main className="flex flex-col justify-center items-center h-screen w-screen space-y-16">
+        <main className="flex flex-col justify-center items-center h-full w-screen space-y-16">
             {!steps.bodyPartsSelected
                 ?
                 <>

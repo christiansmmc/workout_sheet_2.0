@@ -32,7 +32,7 @@ export default function Page() {
     };
 
     return (
-        <main className={"flex flex-col h-screen lg:flex-row"}>
+        <main className='flex flex-col h-full lg:flex-row'>
             <div
                 className={"w-full flex flex-1 " + "lg:flex lg:justify-end lg:border-r-2 lg:border-zinc-800 lg:px-28"}
             >
@@ -40,7 +40,7 @@ export default function Page() {
             </div>
             <div
                 className={
-                    "w-full flex flex-col items-center gap-4 pb-10 " + 'lg:flex-1 lg:justify-center lg:gap-6 lg:px-28"'
+                    "w-full flex flex-col items-center gap-4 pb-6 " + 'lg:flex-1 lg:justify-center lg:gap-6 lg:px-28"'
                 }
             >
                 <p className={"text-4xl w-96 text-center"}>Acesse sua conta</p>
@@ -51,6 +51,7 @@ export default function Page() {
                                 errors.email && "outline-red-500"
                             }`}
                             placeholder={"Email"}
+                            type={"email"}
                             {...register("email")}
                         />
                         {errors.email && <span className={"text-sm text-red-500 ml-2"}>{errors.email.message}</span>}

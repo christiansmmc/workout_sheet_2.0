@@ -60,7 +60,7 @@ const WorkoutCard = ({workout, onClick}: WorkoutCardProps) => {
                         <Pencil size={24}/>
                     </button>
                     <button
-                        className={"flex justify-center items-center bg-red-600 rounded-lg w-14 h-12"}
+                        className={"flex justify-center items-center bg-red-600 rounded-lg w-14 h-12 active:bg-red-800"}
                         onClick={() => onClick(workout.id)}
                     >
                         <ChevronRight size={28}/>

@@ -54,7 +54,7 @@ export default function Page() {
     };
 
     return (
-        <main className={"flex flex-col h-screen lg:flex-row pt-8"}>
+        <main className={"flex flex-col h-full lg:flex-row pt-8"}>
             <div
                 className={
                     "w-full flex flex-1 " +
@@ -65,11 +65,11 @@ export default function Page() {
             </div>
             <div
                 className={
-                    "w-full flex flex-col items-center gap-4 pb-10 " +
+                    "w-full flex flex-col items-center gap-4 pb-6 " +
                     'lg:flex-1 lg:justify-center lg:gap-6 lg:px-28"'
                 }
             >
-                <p className={"text-4xl mb-4 w-96 text-center"}>Crie sua conta</p>
+                <p className={"text-4xl my-2 w-96 text-center"}>Crie sua conta</p>
                 <form
                     onSubmit={handleSubmit(createUser)}
                     className={"flex flex-col gap-6"}

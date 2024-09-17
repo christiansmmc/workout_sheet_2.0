@@ -4,7 +4,7 @@ import Link from "next/link";
 export default function Home() {
     return (
         <main
-            className="flex flex-col justify-center items-center w-full h-screen
+            className="flex flex-col justify-center items-center w-full h-full
     lg:flex-row"
         >
             <div
@@ -38,14 +38,14 @@ export default function Home() {
                     </div>
                 </div>
                 <div
-                    className="flex flex-col gap-3 pb-8
+                    className="flex flex-col gap-3 pb-6
         2xl:w-3/5 2xl:items-center"
                 >
                     <Link href={"/login"}>
-                        <button className={"bg-red-600 w-96 h-16 rounded-lg font-bold"}>Entrar</button>
+                        <button className={"bg-red-600 w-96 h-16 rounded-lg font-bold active:bg-red-800"}>Entrar</button>
                     </Link>
                     <Link href={"/register"}>
-                        <button className={"bg-red-600 w-96 h-16 rounded-lg font-bold"}>Criar Conta</button>
+                        <button className={"bg-red-600 w-96 h-16 rounded-lg font-bold active:bg-red-800"}>Criar Conta</button>
                     </Link>
                 </div>
             </div>

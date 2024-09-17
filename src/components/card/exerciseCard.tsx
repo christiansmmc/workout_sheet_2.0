@@ -64,8 +64,8 @@ const ExerciseCard = ({workoutExercise, workoutId}: ExerciseCardProps) => {
 
     return (
         <>
-            <div className='flex flex-col flex-shrink-0 bg-zinc-800 rounded-lg w-11/12 max-w-2xl h-28 shadow-lg'>
-                <div className='flex justify-between items-center mt-2 pb-2 border-b border-zinc-600'>
+            <div className='flex flex-col flex-shrink-0 bg-zinc-800 rounded-lg w-11/12 max-w-2xl h-32 shadow-lg'>
+                <div className='flex justify-between items-center h-12 mt-2 pb-2 border-b border-zinc-600'>
                     <div className='ml-3 lg:ml-5 lg:text-lg'>
                         <p>{capitalizeAllWords(workoutExercise.exercise.name)}</p>
                     </div>
@@ -129,7 +129,7 @@ const ExerciseCard = ({workoutExercise, workoutId}: ExerciseCardProps) => {
                                         </div>
                                     </div>
                                     <DialogFooter className='flex justify-between items-center'>
-                                        <button className='bg-red-600 w-[90%] h-12 rounded-lg font-bold'
+                                        <button className='bg-red-600 w-[90%] h-12 rounded-lg font-bold active:bg-red-800'
                                                 type="submit">Salvar
                                         </button>
                                     </DialogFooter>
