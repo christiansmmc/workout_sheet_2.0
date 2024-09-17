@@ -29,10 +29,10 @@ export default function Page() {
     return (
         <main className={"h-full flex flex-col"}>
             <header className={"flex items-center justify-between px-10 bg-zinc-800 h-16 shadow-lg"}>
-                <div className='cursor-pointer p-1 active:p-1 active:bg-neutral-700 active:rounded'>
+                <div className='cursor-pointer p-1 active:bg-neutral-600 active:rounded hover:bg-neutral-700 hover:rounded'>
                     <DoorOpen size={32} onClick={handleLogout}/>
                 </div>
-                <div className='cursor-pointer p-1 active:p-1 active:bg-neutral-700 active:rounded'>
+                <div className='cursor-pointer p-1 active:bg-neutral-600 active:rounded hover:bg-neutral-700 hover:rounded'>
                     <User size={32} className={"cursor-pointer"}/>
                 </div>
             </header>
@@ -49,7 +49,7 @@ export default function Page() {
                 )}
             </section>
             <section className={"flex justify-center mb-6"}>
-                <button className={"bg-red-600 w-96 h-16 rounded-lg font-bold active:bg-red-800"} onClick={handleEnterCreateWorkout}>
+                <button className={"bg-red-600 w-96 h-16 rounded-lg font-bold hover:bg-red-800 active:bg-red-700"} onClick={handleEnterCreateWorkout}>
                     Criar treino
                 </button>
             </section>

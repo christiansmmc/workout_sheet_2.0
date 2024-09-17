@@ -10,7 +10,7 @@ import {
     DialogTitle,
     DialogTrigger
 } from "@/components/ui/dialog";
-import {Ellipsis} from "lucide-react";
+import {Ellipsis, User} from "lucide-react";
 
 interface ExerciseCardProps {
     workoutExercise: {
@@ -38,15 +38,18 @@ const ExerciseCard = ({workoutExercise, workoutId}: ExerciseCardProps) => {
     const {mutate: deleteWorkoutExerciseMutate} = useDeleteExerciseFromWorkoutMutation();
     const {mutate: patchWorkoutExerciseMutate} = usePatchWorkoutExerciseMutation();
 
-    const updateExerciseLoad = () => {
-        if (workoutExercise.exerciseLoad === exerciseLoad) return;
-
+    const updateExercise = () => {
         patchWorkoutExerciseMutate({
             workoutExerciseId: workoutExercise.id,
-            load: exerciseLoad,
-            reps: workoutExercise.reps || 0,
-            sets: workoutExercise.sets || 0
+            load: editExerciseLoad,
+            sets: editExerciseSets || 0,
+            reps: editExerciseReps || 0
         });
+    }
+
+    const updateExerciseLoad = () => {
+        if (workoutExercise.exerciseLoad === exerciseLoad) return;
+        updateExercise()
     };
 
     const handleClickOpen = () => {
@@ -92,7 +95,9 @@ const ExerciseCard = ({workoutExercise, workoutId}: ExerciseCardProps) => {
                         <button>
                             <Dialog>
                                 <DialogTrigger asChild>
-                                    <Ellipsis size={32}/>
+                                    <div className='cursor-pointer p-1 active:bg-neutral-600 active:rounded hover:shadow-lg hover:bg-neutral-700 hover:rounded'>
+                                        <Ellipsis size={32}/>
+                                    </div>
                                 </DialogTrigger>
                                 <DialogContent className="w-[95%] rounded sm:max-w-[425px] bg-neutral-900 border-0">
                                     <DialogHeader className='flex justify-center items-center'>
@@ -128,9 +133,10 @@ const ExerciseCard = ({workoutExercise, workoutId}: ExerciseCardProps) => {
                                                    className='w-16 rounded bg-neutral-800 text-center h-10 outline-0 focus:border focus:border-neutral-400'/>
                                         </div>
                                     </div>
-                                    <DialogFooter className='flex justify-between items-center'>
-                                        <button className='bg-red-600 w-[90%] h-12 rounded-lg font-bold active:bg-red-800'
-                                                type="submit">Salvar
+                                    <DialogFooter className='flex flex-row justify-center items-center sm:justify-center'>
+                                        <button className='bg-red-600 w-[90%] h-12 rounded-lg font-bold active:bg-red-700 hover:bg-red-800'
+                                                onClick={updateExercise}>
+                                            Salvar
                                         </button>
                                     </DialogFooter>
                                 </DialogContent>
