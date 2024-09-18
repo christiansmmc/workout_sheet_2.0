@@ -1,7 +1,15 @@
 import {ChevronRight, Dumbbell, Pencil, Trash2} from "lucide-react";
 import {useState} from "react";
-import {Dialog} from "@mui/material";
 import {useDeleteWorkoutMutation, usePatchWorkoutMutation} from "@/api/workout/queries";
+import {
+    Dialog,
+    DialogContent,
+    DialogFooter,
+    DialogHeader,
+    DialogOverlay,
+    DialogTitle,
+    DialogTrigger
+} from "@/components/ui/dialog";
 
 interface WorkoutCardProps {
     workout: {
@@ -56,10 +64,51 @@ const WorkoutCard = ({workout, onClick}: WorkoutCardProps) => {
                     <p>{workout.name}</p>
                 </div>
                 <div className={"flex items-center gap-2 mr-5"}>
-                    <button onClick={handleClickOpen}
-                            className={"flex justify-center items-center cursor-pointer w-14 h-12 active:bg-neutral-700 active:rounded lg:active:bg-neutral-600 lg:hover:bg-neutral-700 hover:rounded"}>
-                        <Pencil size={24}/>
-                    </button>
+                    <div>
+                        <Dialog open={open} onOpenChange={setOpen}>
+                            <DialogTrigger asChild>
+                                <div
+                                    className='flex justify-center items-center w-14 h-12 cursor-pointer p-1 active:bg-neutral-600 active:rounded lg:active:bg-neutral-600 lg:hover:bg-neutral-700 lg:hover:rounded'>
+                                    <Pencil size={24}/>
+                                </div>
+                            </DialogTrigger>
+                            <DialogOverlay className="fixed inset-0 bg-white bg-opacity-10 backdrop-blur-sm"/>
+                            <DialogContent onOpenAutoFocus={(e) => e.preventDefault()}
+                                           className="w-[95%] rounded sm:max-w-[425px] bg-neutral-900 border-0">
+                                <DialogHeader className='py-2'>
+                                    <DialogTitle className='text-xl'>Edite ou delete seu treino</DialogTitle>
+                                </DialogHeader>
+                                <div className=''>
+                                    <input type='text'
+                                           placeholder={inputValue}
+                                           onChange={(e) => handleInputOnChange(e.target.value)}
+                                           className='w-full pl-2 rounded bg-neutral-800 h-14 text-lg outline-0 focus:border focus:border-neutral-400'/>
+                                </div>
+                                <DialogFooter>
+                                    <div className='w-full flex justify-between py-2'>
+                                        <button onClick={handleDeleteWorkout}
+                                                className='flex justify-center items-center cursor-pointer w-14 h-12 active:bg-neutral-600 active:rounded lg:active:bg-neutral-600 lg:hover:bg-neutral-700 lg:hover:rounded'>
+                                            <Trash2 size={28} color={"#dc2626"}/>
+                                        </button>
+                                        <div className={"flex gap-3"}>
+                                            <button
+                                                className={"bg-red-600 w-20 h-12 rounded-lg font-bold lg:w-32 active:bg-red-700 lg:active::bg-red-600 lg:hover:bg-red-700"}
+                                                onClick={handleEditWorkout}
+                                            >
+                                                Salvar
+                                            </button>
+                                            <button
+                                                className={"bg-gray-500 w-20 h-12 rounded-lg font-bold lg:w-32 active:bg-gray-600 lg:active:bg-gray-500 lg:hover:bg-gray-600"}
+                                                onClick={handleClose}
+                                                type={"submit"}>
+                                                Cancelar
+                                            </button>
+                                        </div>
+                                    </div>
+                                </DialogFooter>
+                            </DialogContent>
+                        </Dialog>
+                    </div>
                     <button
                         className={"flex justify-center items-center bg-red-600 rounded-lg w-14 h-12 active:bg-red-700 lg:active::bg-red-600 lg:hover:bg-red-700"}
                         onClick={() => onClick(workout.id)}
@@ -68,42 +117,6 @@ const WorkoutCard = ({workout, onClick}: WorkoutCardProps) => {
                     </button>
                 </div>
             </div>
-            <Dialog
-                style={{backdropFilter: "blur(5px)"}}
-                PaperProps={{sx: {borderRadius: "10px", background: "#000"}}}
-                open={open}
-                onClose={handleClose}
-            >
-                <div className={"flex flex-col p-7 bg-zinc-800 border-zinc-800 text-zinc-100"}>
-                    <p className={"mb-5 text-xl font-bold"}>Edite ou delete seu treino</p>
-                    <div>
-                        <input
-                            className={`bg-zinc-700 rounded-lg h-12 px-3 text-lg w-full`}
-                            placeholder={inputValue}
-                            onChange={(e) => handleInputOnChange(e.target.value)}
-                        />
-                    </div>
-                    <div className={"flex justify-between gap-20 pt-7"}>
-                        <button onClick={handleDeleteWorkout}
-                                className='flex justify-center items-center cursor-pointer w-14 h-12 active:bg-neutral-600 active:rounded lg:active:bg-neutral-600 lg:hover:bg-neutral-700 lg:hover:rounded'>
-                            <Trash2 size={28} color={"#dc2626"}/>
-                        </button>
-                        <div className={"flex gap-3"}>
-                            <button
-                                className={"bg-red-600 w-20 h-12 rounded-lg font-bold lg:w-32 active:bg-red-700 lg:active::bg-red-600 lg:hover:bg-red-700"}
-                                onClick={handleEditWorkout}
-                            >
-                                Salvar
-                            </button>
-                            <button
-                                className={"bg-gray-500 w-20 h-12 rounded-lg font-bold lg:w-32 active:bg-gray-600 lg:active:bg-gray-500 lg:hover:bg-gray-600"}
-                                onClick={handleClose}>
-                                Cancelar
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </Dialog>
         </>
     );
 };

@@ -20,12 +20,13 @@ export default function Page({params}: { params: { id: number } }) {
         <main className='h-full'>
             <header className={"flex items-center justify-between px-10 bg-zinc-800 h-16 shadow-lg"}>
                 <div
+                    onClick={handleGoBack}
                     className='cursor-pointer p-1 active:bg-neutral-600 active:rounded lg:active:bg-neutral-600 lg:hover:bg-neutral-700 lg:hover:rounded'>
-                    <ArrowLeft size={32} onClick={handleGoBack}/>
+                    <ArrowLeft size={32}/>
                 </div>
                 <div
                     className='cursor-pointer p-1 active:bg-neutral-600 active:rounded lg:active:bg-neutral-600 lg:hover:bg-neutral-700 lg:hover:rounded'>
-                    <User size={32} className={"cursor-pointer"}/>
+                    <User size={32}/>
                 </div>
             </header>
             <div

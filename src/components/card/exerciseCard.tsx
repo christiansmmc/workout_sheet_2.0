@@ -7,6 +7,7 @@ import {
     DialogDescription,
     DialogFooter,
     DialogHeader,
+    DialogOverlay,
     DialogTitle,
     DialogTrigger
 } from "@/components/ui/dialog";
@@ -111,7 +112,9 @@ const ExerciseCard = ({workoutExercise, workoutId}: ExerciseCardProps) => {
                                         <Ellipsis size={32}/>
                                     </div>
                                 </DialogTrigger>
-                                <DialogContent className="w-[95%] rounded sm:max-w-[425px] bg-neutral-900 border-0">
+                                <DialogOverlay className="fixed inset-0 bg-white bg-opacity-10 backdrop-blur-sm"/>
+                                <DialogContent onOpenAutoFocus={(e) => e.preventDefault()}
+                                               className="w-[95%] rounded sm:max-w-[425px] bg-neutral-900 border-0">
                                     <DialogHeader className='flex justify-center items-center'>
                                         <DialogTitle className='text-xl'>Editar exercício</DialogTitle>
                                         <DialogDescription
