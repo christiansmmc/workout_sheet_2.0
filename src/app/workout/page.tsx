@@ -1,6 +1,6 @@
 "use client";
 
-import {ArrowLeft, DoorOpen, User} from "lucide-react";
+import {DoorOpen, User} from "lucide-react";
 import {BeatLoader} from "react-spinners";
 import Cookie from "js-cookie";
 import {useRouter} from "next/navigation";
@@ -29,10 +29,12 @@ export default function Page() {
     return (
         <main className={"h-full flex flex-col"}>
             <header className={"flex items-center justify-between px-10 bg-zinc-800 h-16 shadow-lg"}>
-                <div className='cursor-pointer p-1 active:bg-neutral-600 active:rounded hover:bg-neutral-700 hover:rounded'>
+                <div
+                    className='cursor-pointer p-1 active:bg-neutral-600 active:rounded lg:active:bg-neutral-600 lg:hover:bg-neutral-700 lg:hover:rounded'>
                     <DoorOpen size={32} onClick={handleLogout}/>
                 </div>
-                <div className='cursor-pointer p-1 active:bg-neutral-600 active:rounded hover:bg-neutral-700 hover:rounded'>
+                <div
+                    className='cursor-pointer p-1 active:bg-neutral-600 active:rounded lg:active:bg-neutral-600 lg:hover:bg-neutral-700 lg:hover:rounded'>
                     <User size={32} className={"cursor-pointer"}/>
                 </div>
             </header>
@@ -49,7 +51,9 @@ export default function Page() {
                 )}
             </section>
             <section className={"flex justify-center mb-6"}>
-                <button className={"bg-red-600 w-96 h-16 rounded-lg font-bold hover:bg-red-800 active:bg-red-700"} onClick={handleEnterCreateWorkout}>
+                <button
+                    className={"bg-red-600 w-96 h-16 rounded-lg font-bold active:bg-red-700 lg:active:bg-red-600 lg:hover:bg-red-700"}
+                    onClick={handleEnterCreateWorkout}>
                     Criar treino
                 </button>
             </section>

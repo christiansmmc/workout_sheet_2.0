@@ -1,4 +1,4 @@
-import {ChevronRight, DoorOpen, Dumbbell, Pencil, Trash2} from "lucide-react";
+import {ChevronRight, Dumbbell, Pencil, Trash2} from "lucide-react";
 import {useState} from "react";
 import {Dialog} from "@mui/material";
 import {useDeleteWorkoutMutation, usePatchWorkoutMutation} from "@/api/workout/queries";
@@ -56,11 +56,12 @@ const WorkoutCard = ({workout, onClick}: WorkoutCardProps) => {
                     <p>{workout.name}</p>
                 </div>
                 <div className={"flex items-center gap-2 mr-5"}>
-                    <button onClick={handleClickOpen} className={"flex justify-center items-center cursor-pointer w-14 h-12 active:bg-neutral-600 active:rounded hover:bg-neutral-700 hover:rounded"}>
+                    <button onClick={handleClickOpen}
+                            className={"flex justify-center items-center cursor-pointer w-14 h-12 active:bg-neutral-700 active:rounded lg:active:bg-neutral-600 lg:hover:bg-neutral-700 hover:rounded"}>
                         <Pencil size={24}/>
                     </button>
                     <button
-                        className={"flex justify-center items-center bg-red-600 rounded-lg w-14 h-12 active:bg-red-700 hover:bg-red-800"}
+                        className={"flex justify-center items-center bg-red-600 rounded-lg w-14 h-12 active:bg-red-700 lg:active::bg-red-600 lg:hover:bg-red-700"}
                         onClick={() => onClick(workout.id)}
                     >
                         <ChevronRight size={28}/>
@@ -83,18 +84,20 @@ const WorkoutCard = ({workout, onClick}: WorkoutCardProps) => {
                         />
                     </div>
                     <div className={"flex justify-between gap-20 pt-7"}>
-                        <button onClick={handleDeleteWorkout} className='flex justify-center items-center cursor-pointer w-14 h-12 active:bg-neutral-600 active:rounded hover:bg-neutral-700 hover:rounded'>
+                        <button onClick={handleDeleteWorkout}
+                                className='flex justify-center items-center cursor-pointer w-14 h-12 active:bg-neutral-600 active:rounded lg:active:bg-neutral-600 lg:hover:bg-neutral-700 lg:hover:rounded'>
                             <Trash2 size={28} color={"#dc2626"}/>
                         </button>
                         <div className={"flex gap-3"}>
                             <button
-                                className={"bg-red-600 w-20 h-12 rounded-lg font-bold lg:w-32 hover:bg-red-800 active:bg-red-700"}
+                                className={"bg-red-600 w-20 h-12 rounded-lg font-bold lg:w-32 active:bg-red-700 lg:active::bg-red-600 lg:hover:bg-red-700"}
                                 onClick={handleEditWorkout}
                             >
                                 Salvar
                             </button>
-                            <button className={"bg-gray-500 w-20 h-12 rounded-lg font-bold lg:w-32 hover:bg-gray-700 active:bg-gray-700"}
-                                    onClick={handleClose}>
+                            <button
+                                className={"bg-gray-500 w-20 h-12 rounded-lg font-bold lg:w-32 active:bg-gray-600 lg:active:bg-gray-500 lg:hover:bg-gray-600"}
+                                onClick={handleClose}>
                                 Cancelar
                             </button>
                         </div>

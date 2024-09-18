@@ -10,7 +10,7 @@ import {
     DialogTitle,
     DialogTrigger
 } from "@/components/ui/dialog";
-import {Ellipsis, User} from "lucide-react";
+import {Ellipsis} from "lucide-react";
 
 interface ExerciseCardProps {
     workoutExercise: {
@@ -29,6 +29,7 @@ interface ExerciseCardProps {
 
 const ExerciseCard = ({workoutExercise, workoutId}: ExerciseCardProps) => {
     const [open, setOpen] = useState(false);
+    const [editDialogOpen, setEditDialogOpen] = useState(false);
     const [exerciseLoad, setExerciseLoad] = useState(workoutExercise.exerciseLoad);
 
     const [editExerciseSets, setEditExerciseSets] = useState(workoutExercise.sets || 0)
@@ -39,11 +40,21 @@ const ExerciseCard = ({workoutExercise, workoutId}: ExerciseCardProps) => {
     const {mutate: patchWorkoutExerciseMutate} = usePatchWorkoutExerciseMutation();
 
     const updateExercise = () => {
+        setEditDialogOpen(false)
+
+        if (
+            workoutExercise.sets === editExerciseSets
+            && workoutExercise.reps === editExerciseReps
+            && workoutExercise.exerciseLoad === editExerciseLoad
+        ) {
+            return;
+        }
+
         patchWorkoutExerciseMutate({
             workoutExerciseId: workoutExercise.id,
             load: editExerciseLoad,
-            sets: editExerciseSets || 0,
-            reps: editExerciseReps || 0
+            sets: editExerciseSets,
+            reps: editExerciseReps
         });
     }
 
@@ -93,9 +104,10 @@ const ExerciseCard = ({workoutExercise, workoutId}: ExerciseCardProps) => {
                             {workoutExercise.exercise.bodyPart}
                         </div>
                         <button>
-                            <Dialog>
+                            <Dialog open={editDialogOpen} onOpenChange={setEditDialogOpen}>
                                 <DialogTrigger asChild>
-                                    <div className='cursor-pointer p-1 active:bg-neutral-600 active:rounded hover:shadow-lg hover:bg-neutral-700 hover:rounded'>
+                                    <div
+                                        className='cursor-pointer p-1 active:bg-neutral-600 active:rounded lg:active:bg-neutral-600 lg:hover:bg-neutral-700 lg:hover:rounded'>
                                         <Ellipsis size={32}/>
                                     </div>
                                 </DialogTrigger>
@@ -133,9 +145,11 @@ const ExerciseCard = ({workoutExercise, workoutId}: ExerciseCardProps) => {
                                                    className='w-16 rounded bg-neutral-800 text-center h-10 outline-0 focus:border focus:border-neutral-400'/>
                                         </div>
                                     </div>
-                                    <DialogFooter className='flex flex-row justify-center items-center sm:justify-center'>
-                                        <button className='bg-red-600 w-[90%] h-12 rounded-lg font-bold active:bg-red-700 hover:bg-red-800'
-                                                onClick={updateExercise}>
+                                    <DialogFooter
+                                        className='flex flex-row justify-center items-center sm:justify-center'>
+                                        <button
+                                            className='bg-red-600 w-[90%] h-12 rounded-lg font-bold active:bg-red-700 lg:active:bg-red-600 lg:hover:bg-red-700'
+                                            onClick={updateExercise}>
                                             Salvar
                                         </button>
                                     </DialogFooter>

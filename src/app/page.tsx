@@ -42,10 +42,15 @@ export default function Home() {
         2xl:w-3/5 2xl:items-center"
                 >
                     <Link href={"/login"}>
-                        <button className={"bg-red-600 w-96 h-16 rounded-lg font-bold active:bg-red-700 hover:bg-red-800"}>Entrar</button>
+                        <button
+                            className={"bg-red-600 w-96 h-16 rounded-lg font-bold active:bg-red-700 lg:active:bg-red-600 lg:hover:bg-red-700"}>Entrar
+                        </button>
                     </Link>
                     <Link href={"/register"}>
-                        <button className={"bg-red-600 w-96 h-16 rounded-lg font-bold active:bg-red-700 hover:bg-red-800"}>Criar Conta</button>
+                        <button
+                            className={"bg-red-600 w-96 h-16 rounded-lg font-bold active:bg-red-700 lg:active:bg-red-600 lg:hover:bg-red-700"}>Criar
+                            Conta
+                        </button>
                     </Link>
                 </div>
             </div>
