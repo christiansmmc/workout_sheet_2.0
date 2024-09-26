@@ -1,10 +1,10 @@
 "use client";
 
-import {ArrowLeft, User} from "lucide-react";
-import {useRouter} from "next/navigation";
-import {BeatLoader} from "react-spinners";
-import ExerciseCard from "@/components/card/exerciseCard";
-import {useGetExercisesFromWorkoutQuery} from "@/api/workout/queries";
+import { ArrowLeft, User } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { BeatLoader } from 'react-spinners';
+import ExerciseCard from '@/components/card/exerciseCard';
+import { useGetExercisesFromWorkoutQuery } from '@/api/workout/queries';
 
 export default function Page({params}: { params: { id: number } }) {
     const router = useRouter();
